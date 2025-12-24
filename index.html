@@ -1,0 +1,19 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  // Vite root is the project root by default where index.html is located
+  root: './', 
+  build: {
+    outDir: 'dist',
+    // Ensures assets are handled correctly
+    emptyOutDir: true,
+  },
+  define: {
+    // These match the Netlify Environment Variables you set
+    __firebase_config: JSON.stringify(process.env.__firebase_config || '{}'),
+    __app_id: JSON.stringify(process.env.__app_id || 'impulse-academy-default'),
+    __initial_auth_token: 'undefined'
+  }
+});
